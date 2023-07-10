@@ -41,12 +41,15 @@ orderRouter.patch("/:id", async (req, res) => {
     console.log("🚀 ~ file: order.routes.js:25 ~ orderRouter.get ~ id:", id)
     try {
         const order = await OrderModel.findOne({ _id: id })
+        console.log("🚀 ~ file: order.routes.js:44 ~ orderRouter.patch ~ order:", order)
         order.status = status
+        console.log("🚀 ~ file: order.routes.js:46 ~ orderRouter.patch ~ order:", order)
         const updatedOrder = await OrderModel(order)
         updatedOrder.save()
-        res.status(204).send({ msg: "status updated", data: order })
+        res.status(201).send({ msg: "status updated", data: order })
+        // res.status(204).send({ msg: "status updated", data: order })
     } catch (error) {
-        res.status(400).send({ msg: "error occured", error: error })
+        res.status(400).send({ msg: "error occured", error: error.message })
         console.log(error)
     }
 })

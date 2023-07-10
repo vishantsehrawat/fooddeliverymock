@@ -62,17 +62,18 @@ restaurantRouter.delete("/:id/menu/:menuid", async (req, res) => {
     console.log("🚀 ~ file: restaurant.routes.js:62 ~ restaurantRouter.delete ~ menuid:", menuid)
     console.log("🚀 ~ file: restaurant.routes.js:40 ~ restaurantRouter.put ~ id:", id)
     try {
-        const restaurants = await RestaurantModel.find({ _id: id })
+        const restaurants = await RestaurantModel.findOne({ _id: id })
+        console.log("🚀 ~ file: restaurant.routes.js:66 ~ restaurantRouter.delete ~ restaurants:", restaurants.menu)
         if (restaurants) {
-            // let filteredMenu = restaurants.filter((menu) => {
-            //     if (menu.menuId != menuid) {
-            //         return true
-            //     }
-            // });
-            // console.log("🚀 ~ file: restaurant.routes.js:72 ~ filteredMenu ~ filteredMenu:", filteredMenu[0].menu)
-            // const updatedRestaurant = await RestaurantModel(filteredMenu)
-            // updatedRestaurant.save();
-            // const deletedMenu = await RestaurantModel.findByIdAndDelete({ menuId: menuid })
+            let filteredMenu = restaurants.menu.filter((menu) => {
+                if (menu.menuId != menuid) {
+                    return true
+                }
+            });
+            console.log("🚀 ~ file: restaurant.routes.js:72 ~ filteredMenu ~ filteredMenu:", filteredMenu)
+            restaurants.menu = filteredMenu;
+            const updatedRestaurant = await RestaurantModel.findByIdAndUpdate(id, restaurants)
+            updatedRestaurant.save();
         }
         // console.log("🚀 ~ file: restaurant.routes.js:66 ~ restaurantRouter.delete ~ restaurants:", restaurants)
         res.status(202).send({ msg: "menu deleted" })
