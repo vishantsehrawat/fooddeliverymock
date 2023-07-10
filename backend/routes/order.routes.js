@@ -24,6 +24,7 @@ orderRouter.get("/:id", async (req, res) => {
     const { id } = req.params;
     console.log("🚀 ~ file: order.routes.js:25 ~ orderRouter.get ~ id:", id)
     try {
+        // const order = await OrderModel.findOne({ _id: id }).populate("user").populate("restaurant");
         const order = await OrderModel.findOne({ _id: id })
         console.log("🚀 ~ file: order.routes.js:30 ~ orderRouter.get ~ order:", order)
         res.status(201).send({ msg: "order data fetched", data: order })
