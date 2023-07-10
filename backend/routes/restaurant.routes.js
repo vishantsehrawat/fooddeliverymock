@@ -34,7 +34,7 @@ restaurantRouter.get("/:id", async (req, res) => {
     }
 })
 
-// get menu of particular restaurant
+// patch menu of particular restaurant
 restaurantRouter.put("/:id/menu", async (req, res) => {
     const { id } = req.params
     console.log("🚀 ~ file: restaurant.routes.js:40 ~ restaurantRouter.put ~ id:", id)
@@ -49,6 +49,33 @@ restaurantRouter.put("/:id/menu", async (req, res) => {
         updatedRestaurant.save();
 
         res.status(201).send({ msg: "menu added to restaurant", data: restaurants })
+    } catch (error) {
+        res.status(400).send({ msg: "error occured", error: error })
+        console.log(error)
+    }
+})
+
+//delete specific menu item
+
+restaurantRouter.delete("/:id/menu/:menuid", async (req, res) => {
+    const { id, menuid } = req.params
+    console.log("🚀 ~ file: restaurant.routes.js:62 ~ restaurantRouter.delete ~ menuid:", menuid)
+    console.log("🚀 ~ file: restaurant.routes.js:40 ~ restaurantRouter.put ~ id:", id)
+    try {
+        const restaurants = await RestaurantModel.find({ _id: id })
+        if (restaurants) {
+            // let filteredMenu = restaurants.filter((menu) => {
+            //     if (menu.menuId != menuid) {
+            //         return true
+            //     }
+            // });
+            // console.log("🚀 ~ file: restaurant.routes.js:72 ~ filteredMenu ~ filteredMenu:", filteredMenu[0].menu)
+            // const updatedRestaurant = await RestaurantModel(filteredMenu)
+            // updatedRestaurant.save();
+            const deletedMenu = await RestaurantModel.findByIdAndDelete({ menuId: menuid })
+        }
+        console.log("🚀 ~ file: restaurant.routes.js:66 ~ restaurantRouter.delete ~ restaurants:", restaurants)
+        res.status(202).send({ msg: "menu deleted" })
     } catch (error) {
         res.status(400).send({ msg: "error occured", error: error })
         console.log(error)

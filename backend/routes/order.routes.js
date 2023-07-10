@@ -18,7 +18,7 @@ orderRouter.post("/", async (req, res) => {
 })
 
 
-// get details of specific order 
+// get details of specific order , with all the fields populated
 
 orderRouter.get("/:id", async (req, res) => {
     const { id } = req.params;
@@ -44,7 +44,7 @@ orderRouter.patch("/:id", async (req, res) => {
         order.status = status
         const updatedOrder = await OrderModel(order)
         updatedOrder.save()
-        res.status(201).send({ msg: "status updated", data: order })
+        res.status(204).send({ msg: "status updated", data: order })
     } catch (error) {
         res.status(400).send({ msg: "error occured", error: error })
         console.log(error)
