@@ -1,8 +1,8 @@
 const mongoose = require("mongoose")
 
 const orderSchema = mongoose.Schema({
-    user: { type: ObjectId, ref: 'user' },
-    restaurant: { type: ObjectId, ref: 'restaurant' },
+    user: { type: mongoose.Types.ObjectId, ref: 'user' },
+    restaurant: { type: mongoose.Types.ObjectId, ref: 'restaurant' },
     items: [{
         name: String,
         price: Number,
@@ -17,11 +17,11 @@ const orderSchema = mongoose.Schema({
         zip: String
     },
     status: {
-        type:String,
-        enum:["placed", "preparing", "on the way", "delivered"],
+        type: String,
+        enum: ["placed", "preparing", "on the way", "delivered"],
         default: "placed"
     }
-    
+
     // String // e.g, "placed", "preparing", "on the way", "delivered"
 })
 

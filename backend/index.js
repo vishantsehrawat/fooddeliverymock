@@ -7,8 +7,8 @@ require("dotenv").config();
 const app = express()
 app.use(express.json())
 app.use("/user",userRouter)
-app.use("/restaurants",userRouter)
-app.use("/orders",userRouter)
+app.use("/restaurants",restaurantRouter)
+app.use("/orders",orderRouter)
 
 
 app.get("/",(req,res)=>{

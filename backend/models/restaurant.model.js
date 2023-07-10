@@ -10,7 +10,7 @@ const restaurantSchema = mongoose.Schema({
       zip: String
     },
     menu: [{
-      _id: ObjectId,
+      menuId : String,
       name: String,
       description: String,
       price: Number,
