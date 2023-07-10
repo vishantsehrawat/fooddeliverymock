@@ -72,9 +72,9 @@ restaurantRouter.delete("/:id/menu/:menuid", async (req, res) => {
             // console.log("🚀 ~ file: restaurant.routes.js:72 ~ filteredMenu ~ filteredMenu:", filteredMenu[0].menu)
             // const updatedRestaurant = await RestaurantModel(filteredMenu)
             // updatedRestaurant.save();
-            const deletedMenu = await RestaurantModel.findByIdAndDelete({ menuId: menuid })
+            // const deletedMenu = await RestaurantModel.findByIdAndDelete({ menuId: menuid })
         }
-        console.log("🚀 ~ file: restaurant.routes.js:66 ~ restaurantRouter.delete ~ restaurants:", restaurants)
+        // console.log("🚀 ~ file: restaurant.routes.js:66 ~ restaurantRouter.delete ~ restaurants:", restaurants)
         res.status(202).send({ msg: "menu deleted" })
     } catch (error) {
         res.status(400).send({ msg: "error occured", error: error })
